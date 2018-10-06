@@ -118,8 +118,25 @@ exports.updateUser = async (req, res) => {
     const userId = req.params.id
     const newData = req.body
     try {
-        const user = 
+        const userUpdated = await User.findByIdAndUpdate(userId, newData)
+        if (!userUpdated) {
+            return res.status(500).json({
+                success: false,
+                message:'Error updating the user'
+            })
+        }
+        else {
+            return res.status(200).json({
+                success: true,
+                message:'User updated correctly',
+                data: userUpdated
+            })
+        }
     } catch (error) {
-        
+        return res.status(500).json({
+            success: false,
+            message:'Error updating the user',
+            details: error
+        })
     }
 }
