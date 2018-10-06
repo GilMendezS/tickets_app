@@ -1,0 +1,13 @@
+{
+    "roles": {
+        "_model": "Role",
+        "admin": {
+            "name": "Administrator",
+            "description": "System administrator"
+        },
+        "normal": {
+            "name": "Normal",
+            "description": "System user"
+        }
+    }
+}
