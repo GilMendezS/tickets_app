@@ -45,10 +45,11 @@ exports.login = async (req, res) => {
 }
 exports.getUsers = async (req, res) => {
     try {
-        const users =  await User.find()
+        const users =  await User.find().select('name lastname email').populate('role', 'name description')
         return res.status(200).json({
             success: true,
-            data: users
+            data: users,
+            total: users.length
         })
     } catch (error) {
         return res.status(500).json({
