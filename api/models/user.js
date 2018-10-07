@@ -26,6 +26,10 @@ const userSchema =  mongoose.Schema({
     },
     avatar: {
         type: String
+    },
+    active : {
+        type: Boolean,
+        default: true
     }
 })
 module.exports = mongoose.model('User', userSchema)
