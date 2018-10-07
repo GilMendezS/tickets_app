@@ -4,4 +4,7 @@ const auth = require('../middlewares/check-auth')
 const TicketController = require('../controllers/ticket')
 router.get('/', [auth.veify_auth],TicketController.getTickets)
 router.post('/',[auth.veify_auth], TicketController.storeTicket)
+router.get('/:id', TicketController.getTicket)
+router.put('/:id', TicketController.updateTicket)
+router.delete('/:id', TicketController.removeTicket)
 module.exports = router
