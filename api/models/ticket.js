@@ -18,11 +18,13 @@ const ticketSchema = mongoose.Schema({
     },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     status: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Status'
+        ref: 'Status',
+        required: true
     },
     assigned: {
         type: mongoose.Schema.Types.ObjectId,

@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt')
 const jwtservice =  require('../services/jwt')
 
 exports.login = async (req, res) => {
+    
     try {
-        const user = await User.find({email: req.body.email})
+        const user = await User.findOne({email: req.body.email})
         if(!user){
             return res.status(404).json({
                 success: false,
@@ -13,7 +14,8 @@ exports.login = async (req, res) => {
         }
         const token = await bcrypt.compare(req.body.password, user.password)
         if(token){
-            jwttoken = jwtservice.generateToken(user)
+            jwttoken = await jwtservice.generateToken(user)
+            console.log(jwttoken)
             if(jwttoken.success){
                 return res.status(200).json({
                     success: true,

@@ -7,6 +7,7 @@ const app = express()
 const usersRoutes = require('./api/routes/user')
 const rolesRoutes = require('./api/routes/role')
 const statusesRoutes = require('./api/routes/status')
+const ticketsRoutes = require('./api/routes/ticket')
 
 //configs
 app.use(express.json())
@@ -16,7 +17,7 @@ app.use(morgan('dev'))
 app.use('/api/users', usersRoutes)
 app.use('/api/roles', rolesRoutes)
 app.use('/api/statuses', statusesRoutes)
-
+app.use('/api/tickets', ticketsRoutes)
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
