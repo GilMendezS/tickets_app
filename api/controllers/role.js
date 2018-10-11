@@ -37,7 +37,7 @@ exports.storeRole = async (req, res) => {
 exports.getRole = async (req, res) => {
     const roleId = req.params.id
     try {
-        const role = Role.findById(roleId)
+        const role = await Role.findById(roleId)
         if(!role) {
             return res.status(404).json({
                 success: false,
