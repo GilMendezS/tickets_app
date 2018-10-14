@@ -15,7 +15,6 @@ exports.login = async (req, res) => {
         const token = await bcrypt.compare(req.body.password, user.password)
         if(token){
             jwttoken = await jwtservice.generateToken(user)
-            console.log(jwttoken)
             if(jwttoken.success){
                 return res.status(200).json({
                     success: true,
