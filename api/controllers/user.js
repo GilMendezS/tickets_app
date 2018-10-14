@@ -83,7 +83,8 @@ exports.storeUser = async (req, res) => {
                 await user.save()
                 return res.status(200).json({
                     success: true,
-                    message: 'User created correctly.'
+                    message: 'User created correctly.',
+                    data: user
                 })
             }
             else {
@@ -139,6 +140,21 @@ exports.updateUser = async (req, res) => {
         return res.status(500).json({
             success: false,
             message:'Error updating the user',
+            details: error
+        })
+    }
+}
+exports.removeUser = async(req, res) => {
+    try {
+        await User.findOneAndRemove(req.params.id)
+        return res.status(200).json({
+            success: true,
+            message: 'User removed correctly'
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message:'Error removing the user',
             details: error
         })
     }
