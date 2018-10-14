@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
 }
 exports.getUsers = async (req, res) => {
     try {
-        const users =  await User.find().select('name lastname email').populate('role', 'name description')
+        const users =  await User.find().select('name lastname email active').populate('role', 'name description')
         return res.status(200).json({
             success: true,
             data: users,
@@ -146,15 +146,16 @@ exports.updateUser = async (req, res) => {
 }
 exports.removeUser = async(req, res) => {
     try {
-        await User.findOneAndRemove(req.params.id)
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {active: false})
         return res.status(200).json({
             success: true,
-            message: 'User removed correctly'
+            message: 'User inactivated',
+            data: updatedUser
         })
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message:'Error removing the user',
+            message:'Error inactivating the user',
             details: error
         })
     }
